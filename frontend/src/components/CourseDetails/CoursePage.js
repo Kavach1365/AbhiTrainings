@@ -198,7 +198,7 @@ const CoursePage = () => {
                     <h3 className="regular-price">&#8377;{price}</h3>
                   </div>
                 )}
-                <Link to={`/enroll/${courseId}`}>
+                <Link to={`/payment/${courseId}`}>
                   <RippleButton className="enroll-btn">Enroll Now</RippleButton>
                 </Link>
               </>

@@ -14,7 +14,7 @@ const ActiveCourses = ({ userId }) => {
 
         setCourses(
           registeredCourses.filter(
-            (course) => course != null || course != undefined
+            (course) => course !== null || course !== undefined
           )
         );
       } catch (error) {

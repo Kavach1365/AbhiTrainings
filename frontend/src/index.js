@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CreateCourseMain from './components/CreateCourse/CreateCourseMain';
+import CreateCourseMain from "./components/CreateCourse/CreateCourseMain";
+import CourseDetails from "./components/CourseDetails/CourseDetails";
 import Courses from "./components/Courses/Courses";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
@@ -12,9 +13,21 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import GoogleDrive from "./components/GoogleDrive/GoogleDrive";
 import { UserProvider } from "./context/UserContext";
+import Profile from "./components/Profile/Profile";
+import EditProfile from "./components/Profile/EditProfile";
+import CoursePage from "./components/CourseDetails/CoursePage";
+import EnrollCourse from "./components/EnrollCourse/EnrollCourse";
+import CourseReviews from "./components/CourseDetails/CourseReviews";
+import {
+  ProtectedRoute,
+  SuperAdminRoute,
+  CourseAuthProtectedRoute,
+} from "./protectedRoutes/protectedRoutes";
+import NotAuthorized from "./components/shared/NotAuthorized";
+import NotFound from "./components/shared/NotFound";
 import Razorpay from "./components/PaymentGateway/Razorpay";
-import CourseOverview from "./components/CourseDetails/CourseOverview";
-import CourseDetails from "./components/CourseDetails/CourseDetails"
+import EmailVerify from "./components/EmailVerify/EmailVerify";
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -52,17 +65,16 @@ const appRouter = createBrowserRouter([
         path: "/course/:courseId/overview",
         element: <CoursePage />,
       },
+      // {
+      //   path: "/courses/:courseId",
+      //   element: <CourseOverview />,
+      // },
       {
-        path: "/courses/:courseId",
-        element: <CourseOverview />,
-      },
-      {
-<<<<<<< HEAD
         path:"/p/courses/:courseId",
         element:<CourseDetails/>,
       },
       {
-        path: "/payment",
+        path: "/payment/:courseId",
         element: <Razorpay />,
       },
       {

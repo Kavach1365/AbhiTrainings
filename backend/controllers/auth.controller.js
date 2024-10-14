@@ -1,29 +1,4 @@
-<<<<<<< HEAD
-import bcrypt from "bcryptjs"
-import  {generateTokenAndSetCookie}  from "../lib/utils/generateToken.js";
-import User from '../models/user.model.js'
-import crypto from "crypto"
 
-export const signup = async (req,res)=>{
-   try{
-    const {username,fullName,password,email} = req.body;
-    console.log(req.body);
-
-
-    const emailRegex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
-    
-    if(!emailRegex.test(email)){
-        return res.status(400).json({error:'Invalid email'})
-    }
-    
-    const existingUser = await User.findOne({username});
-    if(existingUser){
-        return res.status(400).json({error:'Username already taken'})
-    }
-    const existingEmail = await User.findOne({email});
-    if(existingEmail){
-        return res.status(400).json({error:'Email already taken'})
-=======
 import bcrypt from "bcryptjs";
 import { generateTokenAndSetCookie } from "../lib/utils/generateToken.js";
 import User from "../models/user.model.js";
@@ -40,7 +15,6 @@ export const signup = async (req, res) => {
     );
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: "Invalid email" });
->>>>>>> f2257920a8c85e48012ecf29861321f8fa113194
     }
 
     const existingUser = await User.findOne({ username });
@@ -62,49 +36,6 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-<<<<<<< HEAD
-        fullName:fullName,
-        email:email,
-        username:username,
-        password:hashedPassword,
-        verificationToken:verificationToken,
-    })
-
-
-    if(newUser){
-        await newUser.save()
-
-        const verificationUrl = `http://localhost:3000/verify/${verificationToken}`;
-
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Email Verification',
-            text: `Click the link to verify your email: ${verificationUrl}`,
-        };
-    
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                return res.status(500).send('Error sending email');
-            }
-            res.status(200).send('Verification email sent');
-        });
-
-        generateTokenAndSetCookie(newUser._id,res)
-
-        res.status(201).json({
-            _id:newUser._id,
-            fullName:newUser.fullName,
-            email:newUser.email,
-            username:newUser.username,
-            profileImg:newUser.profileImg,
-            coverImg:newUser.coverImg,
-            verificationToken:newUser.verificationToken,
-        })
-    }
-    else{
-        res.status(400).json({error:"Invalid User Data"})
-=======
       fullName: fullName,
       email: email,
       username: username,
@@ -140,7 +71,6 @@ export const signup = async (req, res) => {
         });
     } else {
       res.status(400).json({ error: "Invalid User Data" });
->>>>>>> f2257920a8c85e48012ecf29861321f8fa113194
     }
 
 
@@ -150,22 +80,6 @@ export const signup = async (req, res) => {
    }
 };
 
-<<<<<<< HEAD
-
-
-export const login = async (req,res)=>{
-    try{
-        const {username, password} = req.body;
-        const user = await User.findOne({ username });
-        if (!user) {
-            return res.status(400).json({ error: "Username or Password wrong" });
-        }
-        const isPassword = await bcrypt.compare(password, user.password);
-        if (!isPassword) {
-            return res.status(400).json({ error: "Username or Password wrong" });
-        }
-        generateTokenAndSetCookie(user._id,res);
-=======
 export const emailresend = async (req,res)=>{
 
     try{
@@ -181,7 +95,6 @@ export const emailresend = async (req,res)=>{
         const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
         await sendEmail(user.email,"Verify Email",url);
 
->>>>>>> f2257920a8c85e48012ecf29861321f8fa113194
 
     }catch(error){
         console.log("Error in Email Resend controller",error);

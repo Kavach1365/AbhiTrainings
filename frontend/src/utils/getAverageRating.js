@@ -10,7 +10,7 @@ export const getAverageRating = async (courseId) => {
       const total = response.data.length;
       const avgRating =
         response.data.reduce((acc, review) => acc + review.rating, 0) / total;
-      if (avgRating == undefined) return 0;
+      if (avgRating === undefined) return 0;
       return avgRating;
     } else {
       return 0;
