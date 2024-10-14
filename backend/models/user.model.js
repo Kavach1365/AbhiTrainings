@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         require:true,
     },
+    verificationToken:{
+        type:String,
+        required: true,
+    },
     profileImg:{
         type:String,
         default:"https://i.ibb.co/BTG6sJ9/user-removebg-preview.png",
@@ -39,10 +43,13 @@ const userSchema = new mongoose.Schema({
         type:Boolean,
         default:false,
     },
+<<<<<<< HEAD
+=======
     verified:{
         type:Boolean,
         default:false,
     }
+>>>>>>> f2257920a8c85e48012ecf29861321f8fa113194
     
 },{timestamps:true});
 
