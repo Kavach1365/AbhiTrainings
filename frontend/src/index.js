@@ -18,6 +18,7 @@ import EditProfile from "./components/Profile/EditProfile";
 import CoursePage from "./components/CourseDetails/CoursePage";
 import EnrollCourse from "./components/EnrollCourse/EnrollCourse";
 import CourseReviews from "./components/CourseDetails/CourseReviews"
+import Razorpay from "./components/PaymentGateway/Razorpay";
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -71,6 +72,10 @@ const appRouter = createBrowserRouter([
       {
         path:"/p/courses/:courseId",
         element:<CourseDetails/>,
+      },
+      {
+        path:"/payment",
+        element:<Razorpay/>
       }
     ],
   },

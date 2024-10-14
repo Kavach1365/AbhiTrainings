@@ -1,0 +1,59 @@
+.razorpay {
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	max-width: 400px;
+	margin: 50px auto;
+	text-align: center;
+  }
+  
+  .razorpay h1 {
+	font-size: 1.5em;
+	margin-bottom: 20px;
+	color: #333;
+  }
+  
+  .razorpay button {
+	background-color: #F4C430;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 20px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background-color 0.3s;
+  }
+  
+  .razorpay button:hover {
+	background-color: #d4a620;
+  }
+  
+  .razorpay input[type="text"] {
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin: 10px 0;
+	width: calc(100% - 22px);
+  }
+  
+  .razorpay form {
+	margin-top: 20px;
+  }
+  
+  .razorpay ul {
+	list-style: none;
+	padding: 0;
+	margin: 10px 0;
+	background-color: #f4f4f4;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .razorpay li {
+	margin: 5px 0;
+	font-size: 0.9em;
+	color: #555;
+  }
+  

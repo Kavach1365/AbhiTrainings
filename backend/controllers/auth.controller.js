@@ -1,12 +1,16 @@
 import bcrypt from "bcryptjs"
 import  {generateTokenAndSetCookie}  from "../lib/utils/generateToken.js";
 import User from '../models/user.model.js'
+import crypto from "crypto"
 
 export const signup = async (req,res)=>{
    try{
     const {username,fullName,password,email} = req.body;
+    console.log(req.body);
+
 
     const emailRegex = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    
     if(!emailRegex.test(email)){
         return res.status(400).json({error:'Invalid email'})
     }
@@ -24,6 +28,8 @@ export const signup = async (req,res)=>{
         return res.status(400).json({error:'Password length is too short'})
     }
 
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt)
 
@@ -31,12 +37,30 @@ export const signup = async (req,res)=>{
         fullName:fullName,
         email:email,
         username:username,
-        password:hashedPassword
+        password:hashedPassword,
+        verificationToken:verificationToken,
     })
+
 
     if(newUser){
         await newUser.save()
-        //console.log(newUser._id);
+
+        const verificationUrl = `http://localhost:3000/verify/${verificationToken}`;
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Email Verification',
+            text: `Click the link to verify your email: ${verificationUrl}`,
+        };
+    
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res.status(500).send('Error sending email');
+            }
+            res.status(200).send('Verification email sent');
+        });
+
         generateTokenAndSetCookie(newUser._id,res)
 
         res.status(201).json({
@@ -46,6 +70,7 @@ export const signup = async (req,res)=>{
             username:newUser.username,
             profileImg:newUser.profileImg,
             coverImg:newUser.coverImg,
+            verificationToken:newUser.verificationToken,
         })
     }
     else{
@@ -58,6 +83,8 @@ export const signup = async (req,res)=>{
         res.status(500).json({error:"Internal Server Error:"})
    }
 };
+
+
 
 export const login = async (req,res)=>{
     try{

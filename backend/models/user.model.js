@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         require:true,
     },
+    verificationToken:{
+        type:String,
+        required: true,
+    },
     profileImg:{
         type:String,
         default:"https://i.ibb.co/BTG6sJ9/user-removebg-preview.png",
@@ -38,7 +42,7 @@ const userSchema = new mongoose.Schema({
     isSuperAdmin:{
         type:Boolean,
         default:false,
-    }
+    },
     
 },{timestamps:true});
 
