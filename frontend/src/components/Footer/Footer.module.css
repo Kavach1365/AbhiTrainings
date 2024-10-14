@@ -1,144 +1,199 @@
-.footerContainer {
-  background: linear-gradient(to top, rgb(0, 0, 0), rgb(41, 41, 41));
+/* Footer.module.css */
 
+/* Base Styles */
+.footerBottom {
+  position: relative;
   margin-top: auto;
-  padding: 20px 0;
-  display: flex;
-  color: #ffffff;
-  justify-content: center;
 }
 
-.footerContent {
-  display: flex;
-  max-width: 1200px;
+.innerContainer {
   width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 30px;
+  width: 100%;
+  padding: 0 4rem;
 }
 
-.logoContainer {
+.column {
   flex: 1;
+  min-width: 220px;
+  padding: 15px;
 }
 
-.logoIcons {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1;
+.footerSection {
+  margin-bottom: 20px;
 }
 
-.logo {
-  height: 40px;
+.footerSectionTitle {
+  font-size: 1.5em;
+  color: #ffffff;
+}
+
+.footerTitle {
   margin-bottom: 10px;
 }
 
-.quickLinks,
-.subscribe,
-.helpCenter {
-  flex: 1;
-  min-width: 200px;
-}
-
-.quickLinks h3,
-.subscribe h3,
-.helpCenter h3 {
-  margin-bottom: 10px;
-}
-
-.quickLinks ul {
+.footerLinks {
   list-style: none;
   padding: 0;
 }
 
-.quickLinks li {
-  margin-bottom: 5px;
+.linkList {
+  padding: 0;
+  list-style: none;
 }
 
-.quickLinks a {
-  text-decoration: none;
+.linkItem {
+  margin: 5px 0;
+}
+
+.link {
   color: #ffffff;
-  transition: all 0.3s;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.quickLinks a:hover {
+.link:hover {
   text-decoration: underline;
 }
-
-.subscribe form {
+.socialLinks {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
-.emailInputContainer {
-  display: flex;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  width: 160px;
+.socialIconLink {
+  width: 100%;
+  transition: 0.5s;
+  z-index: 1;
 }
 
-.emailInput {
-  border: none;
-  width: 100px;
-}
-
-.emailInput:focus {
-  outline: none;
-}
-
-.emailIcon {
-  color: #000;
-  font-size: 24px;
-  margin-right: 8px;
-}
-
-.subscribeButton {
-  width: 10rem;
-  padding: 8px;
-  border: none;
-  background-color: #185fbd;
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.subscribeButton:hover {
-  background-color: #0074b8;
-}
-
-.helpCenter p {
-  margin: 5px 0;
-  display: flex;
-  align-items: center;
-}
-
-.contactIcon {
-  margin-right: 8px;
-  font-size: 16px;
-}
-.homeIcon {
-  font-size: 20px;
-
-  margin-right: 8px;
-}
-
-.iconsContainer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.icon {
+.socialIcon {
   color: #ffffff;
-  font-size: 24px;
-  transition: color 0.3s ease;
+  transition: 0.5s;
+  font-size: 2em;
+  z-index: 3;
 }
 
-.icon:hover {
-  color: #001aff;
+.socialIconLink:hover .socialIcon {
+  color: #fff;
+  transform: rotateY(360deg);
+  scale: 1.5;
+  border-radius: 50%;
+  box-shadow: rgba(0, 26, 112, 0.5) 0px 1px 8px 3px;
 }
+
+.footerDescription {
+  margin: 15px 0;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footerCopyright {
+  text-align: center;
+  padding: 20px 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logoColumn {
+  flex: 1;
+}
+
+.copyrightColumn {
+  flex: 1;
+  text-align: right;
+}
+
+.footerLogo {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.logoTextLink {
+  text-decoration: none;
+  text-align: left;
+  margin-left: 3rem;
+}
+
+.logoText {
+  color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+  text-decoration: none;
+}
+
+.footerCopyrightText {
+  color: rgba(255, 255, 255, 0.7);
+}
+.innerContainerCopyright{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.textEnd {
+  text-align: right;
+}
+
+.copyrightText {
+  margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  /* .row {
+    padding: 0 2rem;
+  } */
+  
+}
+
+@media (max-width: 992px) {
+  .row {
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .column {
+    margin-bottom: 20px;
+  }
+
+  .footerLogo {
+    font-size: 1.5em;
+  }
+
+  .copyrightColumn {
+    text-align: center;
+  }
+
+  .textEnd {
+    text-align: center;
+  }
+  .logoTextLink{
+    text-align: center;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .row {
+    padding: 0;
+  }
+
+  .socialIcon {
+    font-size: 1.8em;
+  }
+  .innerContainerCopyright{
+    flex-direction: column;
+  }
+}
+
+
