@@ -2,7 +2,9 @@ import "./CourseReviewComponent.css";
 const CourseReviewComponent = (props) => {
   const { reviews } = props;
   // console.log(reviews);
-  const ratingsSummary = createRatingSummary(reviews);
+  const filteredReviews = reviews.filter((review) => review.user != null);
+  // console.log(filteredReviews);
+  const ratingsSummary = createRatingSummary(filteredReviews);
   const totalReviews = ratingsSummary.reduce((acc, count) => acc + count, 0); // Sum of all ratings
   // console.log("totalreviews :", totalReviews);
   const calculateBarWidth = (count) => {
@@ -46,13 +48,13 @@ const CourseReviewComponent = (props) => {
       {/* Right side: Reviews */}
       <div className="review-container-right">
         <h3>Top Reviews</h3>
-        {reviews.length > 0 ? (
-          reviews.slice(0, 5).map((review) => (
+        {filteredReviews.length > 0 ? (
+          filteredReviews.slice(0, 5).map((review) => (
             <div key={review._id} className="review-card">
               <div className="review-user">
                 <img
-                  src={review.user.profileImg} // Assume the user has a profile picture field
-                  alt={`${review.user.username}'s profile`}
+                  src={review?.user?.profileImg} // Assume the user has a profile picture field
+                  alt={`${review?.user?.username}'s profile`}
                   className="profile-picture"
                 />
                 <h5 style={{ marginTop: "4px" }}>{review.user.username}</h5>

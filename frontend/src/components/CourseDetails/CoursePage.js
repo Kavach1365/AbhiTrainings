@@ -80,12 +80,18 @@ const CoursePage = () => {
             withCredentials: true,
           }
         );
-        setReviews(response.data);
+
         if (response.data.length > 0) {
-          const total = response.data.length;
+          const tempReviews = response.data;
+          // console.log(tempReviews);
+          const filteredReviews = tempReviews.filter(
+            (review) => review.user != null
+          );
+          const total = filteredReviews.length;
           const avgRating =
-            response.data.reduce((acc, review) => acc + review.rating, 0) /
+            filteredReviews.reduce((acc, review) => acc + review.rating, 0) /
             total;
+          setReviews(filteredReviews);
           setTotalReviews(total);
           setAverageRating(avgRating);
         }
@@ -108,30 +114,16 @@ const CoursePage = () => {
     setActiveModule(activeModule === idx ? null : idx);
   };
 
-  // const deleteCourse = async () => {
-  //   try {
-  //     // console.log("Hoi");
-
-  //     const response = await axios.delete(
-  //       `${process.env.REACT_APP_BACKEND_URL}/courses/delete/${courseId}`
-  //     );
-  //     alert("Course deleted successfully!");
-  //     navigate("/courses");
-  //   } catch (e) {
-  //     alert("Unable to delete the course. Try again later!");
-  //   }
-  // };
   const deleteCourse = async () => {
     try {
-      //console.log("The drive id is :", driveFolderId);
-      const driveResponse = await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/gDrive/delete-folder/${driveFolderId}`
-      );
+      console.log("The drive id is :", driveFolderId);
       const response = await axios.delete(
         `${process.env.REACT_APP_BACKEND_URL}/courses/delete/${courseId}`
       );
+      const driveResponse = await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/gDrive/delete-folder/${driveFolderId}`
+      );
       alert("Course deleted successfully!");
-      navigate("/courses")
     } catch (e) {
       alert("Unable to delete the course!");
     }
